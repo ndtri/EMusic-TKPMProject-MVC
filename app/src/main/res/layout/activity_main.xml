@@ -4,15 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.tkpm.emusicmvc.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
+
+        <com.tkpm.emusicmvc.BouncingImageView
+            android:id="@+id/bimgAngry"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_untitled">
+        </com.tkpm.emusicmvc.BouncingImageView>
+
+        <com.tkpm.emusicmvc.BouncingImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_untitled">
+        </com.tkpm.emusicmvc.BouncingImageView>
+
+        <com.tkpm.emusicmvc.BouncingImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_untitled">
+        </com.tkpm.emusicmvc.BouncingImageView>
+
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
