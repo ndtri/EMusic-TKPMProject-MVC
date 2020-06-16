@@ -1,4 +1,4 @@
-package com.tkpm.emusicmvc;
+package com.tkpm.emusicmvc.views;
 
 import android.content.Context;
 import android.graphics.Bitmap;

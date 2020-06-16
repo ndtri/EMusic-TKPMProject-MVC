@@ -11,24 +11,24 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true">
 
-        <com.tkpm.emusicmvc.BouncingImageView
+        <com.tkpm.emusicmvc.views.BouncingImageView
             android:id="@+id/bimgAngry"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@drawable/ic_untitled">
-        </com.tkpm.emusicmvc.BouncingImageView>
+        </com.tkpm.emusicmvc.views.BouncingImageView>
 
-        <com.tkpm.emusicmvc.BouncingImageView
+        <com.tkpm.emusicmvc.views.BouncingImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@drawable/ic_untitled">
-        </com.tkpm.emusicmvc.BouncingImageView>
+        </com.tkpm.emusicmvc.views.BouncingImageView>
 
-        <com.tkpm.emusicmvc.BouncingImageView
+        <com.tkpm.emusicmvc.views.BouncingImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@drawable/ic_untitled">
-        </com.tkpm.emusicmvc.BouncingImageView>
+        </com.tkpm.emusicmvc.views.BouncingImageView>
 
     </RelativeLayout>
 
