@@ -57,6 +57,7 @@ public class FetchActivityViewImpl implements IFetchActivityView, SongAdapter.Li
     @Override
     public void showAllSongs(ArrayList<Song> songList) {
         songAdapter = new SongAdapter(rootView.getContext(), songList, this);
+        songAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(songAdapter);
     }
 

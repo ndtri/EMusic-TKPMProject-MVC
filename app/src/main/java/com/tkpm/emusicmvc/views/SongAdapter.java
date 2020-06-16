@@ -40,6 +40,11 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return R.layout.rv_model;
+    }
+
+    @Override
     public void onBindViewHolder(@NonNull SongAdapter.SongViewHolder holder, int position) {
         final Song song = songs.get(position);
         holder.textViewTitle.setText(song.getTitle());
@@ -47,8 +52,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         holder.layoutContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(listItemClickListener!=null){
-                    listItemClickListener.onItemClicked(song.getId());
+                if(listItemClickListener != null){
+                    listItemClickListener.onItemClicked(song.getSongId());
                 }
             }
         });
@@ -56,7 +61,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
     @Override
     public int getItemCount() {
-        return 0;
+        return songs.size();
     }
 
     static class SongViewHolder extends RecyclerView.ViewHolder {

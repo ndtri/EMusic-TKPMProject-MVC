@@ -3,8 +3,8 @@ package com.tkpm.emusicmvc.models;
 import android.graphics.Bitmap;
 
 public class Song {
-    private int id;
-    private int songId;
+    private long id;
+    private long songId;
     private String path;
     private String artist;
     private String title;
@@ -15,7 +15,7 @@ public class Song {
         super();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -23,7 +23,7 @@ public class Song {
         this.id = id;
     }
 
-    public int getSongId() {
+    public long getSongId() {
         return songId;
     }
 

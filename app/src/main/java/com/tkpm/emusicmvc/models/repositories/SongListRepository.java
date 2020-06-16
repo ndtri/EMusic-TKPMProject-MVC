@@ -17,6 +17,7 @@ public class SongListRepository implements ISongListRepo {
 
     public SongListRepository(SongListDbAdapter songListDBAdapter) {
         this.songListDBAdapter = songListDBAdapter;
+        audioList = this.songListDBAdapter.getAllSongs();
         //observers = new ArrayList<Observer>();
     }
 
@@ -32,7 +33,7 @@ public class SongListRepository implements ISongListRepo {
 
     @Override
     public ArrayList<Song> getSongList() throws Exception {
-        audioList = this.songListDBAdapter.getAllSongs();
+        audioList = songListDBAdapter.getAllSongs();
         if(this.audioList != null && this.audioList.size() > 0){
             return this.audioList;
         } else {
@@ -41,10 +42,10 @@ public class SongListRepository implements ISongListRepo {
     }
 
     @Override
-    public Song getSong(int sondId) throws Exception {
+    public Song getSong(long songId) throws Exception {
         Song song = null;
         for (Song song1 : audioList) {
-            if (song1.getSongId() == sondId) {
+            if (song1.getSongId() == songId) {
                 song = song1;
                 break;
             }

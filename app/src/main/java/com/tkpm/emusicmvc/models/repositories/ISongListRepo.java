@@ -6,5 +6,5 @@ import java.util.ArrayList;
 
 public interface ISongListRepo {
     public ArrayList<Song> getSongList() throws Exception;
-    public Song getSong(int sondId) throws Exception;
+    public Song getSong(long songId) throws Exception;
 }

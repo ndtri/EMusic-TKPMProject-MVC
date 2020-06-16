@@ -13,7 +13,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        databaseManager = DatabaseManager.getInstance();
+        databaseManager = DatabaseManager.newInstance(getApplicationContext());
         songListDbAdapter = SongListDbAdapter.getSongListAdapterInstance(databaseManager);
     }
 
