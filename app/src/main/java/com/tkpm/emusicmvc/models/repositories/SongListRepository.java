@@ -12,27 +12,27 @@ public class SongListRepository implements ISongListRepo {
     SongListDbAdapter songListDBAdapter;
     ArrayList<Song> audioList;
 
-    List<Observer> observers;
+    //List<Observer> observers;
 
 
     public SongListRepository(SongListDbAdapter songListDBAdapter) {
         this.songListDBAdapter = songListDBAdapter;
-        audioList = this.songListDBAdapter.getAllSongs();
-        observers = new ArrayList<Observer>();
+        //observers = new ArrayList<Observer>();
     }
 
-    public void registerObserver(Observer observer){
-        observers.add(observer);
-    }
-
-    private void notifyObservers(){
-        for(Observer observer: observers){
-            observer.update();
-        }
-    }
+//    public void registerObserver(Observer observer){
+//        observers.add(observer);
+//    }
+//
+//    private void notifyObservers(){
+//        for(Observer observer: observers){
+//            observer.update();
+//        }
+//    }
 
     @Override
     public ArrayList<Song> getSongList() throws Exception {
+        audioList = this.songListDBAdapter.getAllSongs();
         if(this.audioList != null && this.audioList.size() > 0){
             return this.audioList;
         } else {
@@ -40,4 +40,18 @@ public class SongListRepository implements ISongListRepo {
         }
     }
 
+    @Override
+    public Song getSong(int sondId) throws Exception {
+        Song song = null;
+        for (Song song1 : audioList) {
+            if (song1.getSongId() == sondId) {
+                song = song1;
+                break;
+            }
+        }
+        if (song == null) {
+            throw new Exception("Song not found");
+        }
+        return song;
+    }
 }

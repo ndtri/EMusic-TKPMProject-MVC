@@ -32,7 +32,7 @@ public class SongListDbAdapter {
             .append(COLUMN_TITLE).append(" TEXT,")
             .append(COLUMN_ARTIST).append(" TEXT,")
             .append(COLUMN_DURATION).append(" INTEGER,")
-            .append(COLUMN_PATH).append(" TEXT ,")
+            .append(COLUMN_PATH).append(" TEXT")
             .append(" )")
             .toString();
 
