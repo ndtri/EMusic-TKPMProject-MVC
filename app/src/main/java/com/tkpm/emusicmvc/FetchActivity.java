@@ -14,9 +14,17 @@ public class FetchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        appView = ViewFactory.getMVCView(ViewFactory.VIEW_TYPE.FETCH_VIEW_TYPE, FetchActivity.this, null, getIntent());
+        try {
+            appView = ViewFactory.getMVCView(ViewFactory.VIEW_TYPE.FETCH_VIEW_TYPE, FetchActivity.this, null, getIntent());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         setContentView(appView.getRootView());
-        appView.initViews();
+        try {
+            appView.initViews();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

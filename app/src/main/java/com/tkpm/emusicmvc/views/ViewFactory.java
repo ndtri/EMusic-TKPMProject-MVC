@@ -9,7 +9,7 @@ public class ViewFactory {
         FETCH_VIEW_TYPE, PLAY_VIEW_TYPE
     }
 
-    public static IView getMVCView(VIEW_TYPE viewType, Context context, ViewGroup viewGroup, Intent intent) {
+    public static IView getMVCView(VIEW_TYPE viewType, Context context, ViewGroup viewGroup, Intent intent) throws Exception {
         IView views = null;
         switch (viewType) {
             case FETCH_VIEW_TYPE:

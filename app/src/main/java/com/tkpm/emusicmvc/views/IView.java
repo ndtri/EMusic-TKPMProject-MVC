@@ -4,6 +4,6 @@ import android.view.View;
 
 public interface IView {
     public View getRootView();
-    public void initViews();
+    public void initViews() throws Exception;
     public void bindDataToView();
 }

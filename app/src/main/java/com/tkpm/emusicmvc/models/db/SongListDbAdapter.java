@@ -91,7 +91,7 @@ public class SongListDbAdapter {
         return tempAudioList;
     }
 
-    public String formatMilliSecond(long milliseconds) {
+    public static String formatMilliSecond(long milliseconds) {
         String finalTimerString = "";
         String secondsString = "";
 
