@@ -15,8 +15,9 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
     SongListRepository songListModel;
     PlayActivityViewImpl songView;
 
-    //private ArrayList<Song> audioList;
+    private ArrayList<Song> audioList;
     private static Song curSong;
+    private int position;
 
     private static boolean isPause;
     private static MediaPlayer mediaPlayer = null;
@@ -94,6 +95,7 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
     public void play(final Song song) {
         isPause = false;
         try {
+            position = 0;
             curSong = song;
             mediaPlayer.reset();
             mediaPlayer.setDataSource(curSong.getPath());
@@ -115,5 +117,40 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
         isPause = false;
         mediaPlayer.seekTo(mediaPlayer.getCurrentPosition());
         mediaPlayer.start();
+    }
+
+    public void next() {
+        if (mediaPlayer!= null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+        }
+        try {
+            if(position == audioList.size()){
+                position = -1;
+            }
+            curSong = audioList.get(position + 1);
+            mediaPlayer.setDataSource(curSong.getPath());
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        }
+        catch (Exception ex){
+
+        }
+    }
+    public void previous() {
+        if (mediaPlayer!= null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+        }
+        try {
+            if(position == 0){
+                position = audioList.size() + 1;
+            }
+            curSong = audioList.get(position - 1);
+            mediaPlayer.setDataSource(curSong.getPath());
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        }
+        catch (Exception ex){
+
+        }
     }
 }
