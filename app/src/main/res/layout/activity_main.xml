@@ -17,6 +17,7 @@
         android:id="@+id/home_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         android:gravity="left|right">
 
         <EditText
@@ -27,7 +28,7 @@
             android:ems="10"
             android:hint="How do you FEEL"
             android:drawableLeft="@drawable/ic_search"
-            android:background="@color/colorWhite"
+            android:background="@color/colorStroke"
             android:gravity="center" >
         </EditText>
 

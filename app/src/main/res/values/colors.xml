@@ -12,4 +12,7 @@
     <color name="colorOrange">#fead29</color>
     <color name="colorRed">#FF0000</color>
     <color name="colorGreen">#85fe40</color>
+    <color name="colorPink">#fd0461</color>
+    <color name="colorLightPink">#ff8aac</color>
+
 </resources>
