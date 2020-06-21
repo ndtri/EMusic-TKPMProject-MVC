@@ -19,8 +19,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.emusic.R;
+import com.tkpm.emusicmvc.models.PlaylistSongModel;
 import com.tkpm.emusicmvc.models.Song;
 import com.tkpm.emusicmvc.models.db.DatabaseManager;
+import com.tkpm.emusicmvc.models.db.PlaylistDBAdapter;
 import com.tkpm.emusicmvc.models.db.SongListDbAdapter;
 
 import java.util.ArrayList;
@@ -53,6 +55,7 @@ public class SplashActivity extends AppCompatActivity {
     public void initApp() {
         mDatabaseManager = DatabaseManager.newInstance(getApplicationContext());
         final SongListDbAdapter songListDbAdapter = SongListDbAdapter.getSongListAdapterInstance(mDatabaseManager);
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -65,13 +68,25 @@ public class SplashActivity extends AppCompatActivity {
                         Log.d(TAG, "onPostExecute: INSERT SONG FROM MAIN : " + id);
                     }
                 }
+
+                PlaylistDBAdapter.createPlaylist("Angry");
+                PlaylistDBAdapter.createPlaylist("Happy");
+                PlaylistDBAdapter.createPlaylist("Sleepy");
+                PlaylistDBAdapter.createPlaylist("Rock");
+                PlaylistDBAdapter.createPlaylist("Depress");
+                PlaylistDBAdapter.createPlaylist("Relax");
+                PlaylistDBAdapter.createPlaylist("Rap");
+                PlaylistDBAdapter.createPlaylist("EDM");
+                PlaylistDBAdapter.createPlaylist("Sad");
+                Log.d("created table playlist", PlaylistDBAdapter.getPlaylistById(1).getTitle());
             }
         }).start();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(getApplicationContext(), FetchActivity.class);
-//                mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                Intent mainIntent = new Intent(getApplicationContext(), FetchActivity.class);
+                Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(mainIntent);
                 finish();
             }
@@ -166,5 +181,10 @@ public class SplashActivity extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
         return alertDialog;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

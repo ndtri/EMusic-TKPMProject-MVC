@@ -3,6 +3,15 @@ package com.tkpm.emusicmvc.models;
 import android.graphics.Bitmap;
 
 public class Song {
+
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_SONG_ID = "song_id";
+    public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_BITMAP = "bitmap";
+    public static final String COLUMN_ARTIST = "artist";
+    public static final String COLUMN_DURATION = "duration";
+    public static final String COLUMN_PATH = "path";
+
     private long id;
     private long songId;
     private String path;

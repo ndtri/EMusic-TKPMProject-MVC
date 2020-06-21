@@ -12,22 +12,22 @@
         android:layout_alignParentBottom="true">
 
         <com.tkpm.emusicmvc.views.BouncingImageView
-            android:id="@+id/bimgAngry"
+            android:id="@+id/imgAngryPlaylist"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/ic_untitled">
+            android:src="@drawable/ic_angry">
         </com.tkpm.emusicmvc.views.BouncingImageView>
-
         <com.tkpm.emusicmvc.views.BouncingImageView
+            android:id="@+id/imgRelaxPlaylist"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/ic_untitled">
+            android:src="@drawable/ic_relax">
         </com.tkpm.emusicmvc.views.BouncingImageView>
-
         <com.tkpm.emusicmvc.views.BouncingImageView
+            android:id="@+id/imgSadPlaylist"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/ic_untitled">
+            android:src="@drawable/ic_sad">
         </com.tkpm.emusicmvc.views.BouncingImageView>
 
     </RelativeLayout>
