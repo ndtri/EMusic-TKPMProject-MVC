@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">EMusic</string>
+    <string name="playlist_angry">Angry</string>
+    <string name="playlist_happy">Happy</string>
+    <string name="playlist_workout">Workout</string>
+    <string name="playlist_rock">Rock</string>
+    <string name="playlist_depress">Depress</string>
+    <string name="playlist_relax">Relax</string>
+    <string name="playlist_rap">Rap</string>
+    <string name="playlist_edm">EDM</string>
+    <string name="playlist_sad">Sad</string>
 </resources>

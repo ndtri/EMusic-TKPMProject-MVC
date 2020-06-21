@@ -23,6 +23,7 @@ public class SongListDbAdapter {
     public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_ARTIST = "artist";
     public static final String COLUMN_DURATION = "duration";
+    public static final String COLUMN_PATH = "path";
 
     public static final String SCRIPT_CREATE_TABLE = new StringBuilder("CREATE TABLE ")
             .append(TABLE_NAME).append("(")
@@ -30,7 +31,8 @@ public class SongListDbAdapter {
             .append(COLUMN_SONG_ID).append(" INTEGER , ")
             .append(COLUMN_TITLE).append(" TEXT,")
             .append(COLUMN_ARTIST).append(" TEXT,")
-            .append(COLUMN_DURATION).append(" INTEGER")
+            .append(COLUMN_DURATION).append(" INTEGER,")
+            .append(COLUMN_PATH).append(" TEXT")
             .append(" )")
             .toString();
 
@@ -131,6 +133,7 @@ public class SongListDbAdapter {
             contentValues.put(SongListDbAdapter.COLUMN_TITLE, song.getTitle());
             contentValues.put(SongListDbAdapter.COLUMN_ARTIST, song.getArtist());
             contentValues.put(SongListDbAdapter.COLUMN_DURATION, song.getDuration());
+            contentValues.put(SongListDbAdapter.COLUMN_PATH, song.getPath());
             long res = database.insert(SongListDbAdapter.TABLE_NAME, null, contentValues);            database.close();
             return res;
         }
@@ -172,7 +175,8 @@ public class SongListDbAdapter {
                 SongListDbAdapter.COLUMN_SONG_ID,
                 SongListDbAdapter.COLUMN_TITLE,
                 SongListDbAdapter.COLUMN_DURATION,
-                SongListDbAdapter.COLUMN_ARTIST
+                SongListDbAdapter.COLUMN_ARTIST,
+                SongListDbAdapter.COLUMN_PATH
         };
         Cursor cursor = db.query(TABLE_NAME, projection, null, null, null, null, null);
         if (cursor.moveToFirst()) {
@@ -183,6 +187,7 @@ public class SongListDbAdapter {
                 song.setTitle(cursor.getString(cursor.getColumnIndex(SongListDbAdapter.COLUMN_TITLE)));
                 song.setArtist(cursor.getString(cursor.getColumnIndex(SongListDbAdapter.COLUMN_ARTIST)));
                 song.setDuration(cursor.getLong(cursor.getColumnIndex(SongListDbAdapter.COLUMN_DURATION)));
+                song.setPath(cursor.getString(cursor.getColumnIndex(SongListDbAdapter.COLUMN_PATH)));
                 songModelList.add(song);
             } while (cursor.moveToNext());
 

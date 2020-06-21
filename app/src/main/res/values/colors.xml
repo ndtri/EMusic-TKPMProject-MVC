@@ -9,4 +9,7 @@
     <color name="colorBackground">#F3F3F3</color>
     <color name="colorStroke">#BDBDBD</color>
     <color name="colorHint">#ECECEC</color>
+    <color name="colorOrange">#fead29</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorGreen">#85fe40</color>
 </resources>

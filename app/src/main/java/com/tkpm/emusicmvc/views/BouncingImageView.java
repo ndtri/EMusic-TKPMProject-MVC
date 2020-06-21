@@ -12,6 +12,8 @@ import android.widget.ImageView;
 public class BouncingImageView extends androidx.appcompat.widget.AppCompatImageView {
 
     private View mParent;
+    private String mColor;
+    private String mName;
 
     public BouncingImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -21,9 +23,17 @@ public class BouncingImageView extends androidx.appcompat.widget.AppCompatImageV
         super(context, attrs);
     }
 
-    public BouncingImageView(Context context) {
+    public BouncingImageView(Context context, String color) {
         super(context);
     }
+
+    public String getColor(){return mColor;}
+
+    public void setColor(String color){this.mColor = color;}
+
+    public String getName(){return mName;}
+
+    public void setName(String name){this.mName = name;}
 
     @Override
     protected void onAttachedToWindow() {

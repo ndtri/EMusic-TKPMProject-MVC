@@ -45,11 +45,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d("aloha1", "onCreate: Creating 3 tables");
         db.execSQL(SongListDbAdapter.SCRIPT_CREATE_TABLE);
         db.execSQL(PlaylistDBAdapter.SCRIPT_CREATE_TABLE);
         db.execSQL(PlaylistSongModel.SCRIPT_CREATE_TABLE);
-        Log.d("aloha2", "onCreate: Created 3 tables");
     }
 
     @Override

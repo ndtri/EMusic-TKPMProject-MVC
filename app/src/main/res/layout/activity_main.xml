@@ -6,10 +6,62 @@
     android:layout_height="match_parent"
     tools:context="com.tkpm.emusicmvc.MainActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true">
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_margin="6dp"
+        android:orientation="horizontal"
+        android:id="@+id/home_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|right">
+
+        <EditText
+            android:id="@+id/edtSearchPlaylist"
+            android:layout_width="250dp"
+            android:layout_height="45dp"
+            android:layout_margin="5dp"
+            android:ems="10"
+            android:hint="How do you FEEL"
+            android:drawableLeft="@drawable/ic_search"
+            android:background="@color/colorWhite"
+            android:gravity="center" >
+        </EditText>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/btnFilter">
+        <RadioButton
+            android:id="@+id/btnRedFilter"
+            android:layout_margin="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorRed"/>
+        <RadioButton
+            android:id="@+id/btnGreenFilter"
+            android:layout_margin="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorGreen"/>
+        <RadioButton
+            android:id="@+id/btnOrangeFilter"
+            android:layout_margin="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorOrange"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <com.tkpm.emusicmvc.views.BouncingImageView
             android:id="@+id/imgAngryPlaylist"
@@ -29,8 +81,44 @@
             android:layout_height="70dp"
             android:src="@drawable/ic_sad">
         </com.tkpm.emusicmvc.views.BouncingImageView>
+        <com.tkpm.emusicmvc.views.BouncingImageView
+            android:id="@+id/imgHappyPlaylist"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_happy">
+        </com.tkpm.emusicmvc.views.BouncingImageView>
+        <com.tkpm.emusicmvc.views.BouncingImageView
+            android:id="@+id/imgRapPlaylist"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_rap">
+        </com.tkpm.emusicmvc.views.BouncingImageView>
+        <com.tkpm.emusicmvc.views.BouncingImageView
+            android:id="@+id/imgRockPlaylist"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_rock">
+        </com.tkpm.emusicmvc.views.BouncingImageView>
+        <com.tkpm.emusicmvc.views.BouncingImageView
+            android:id="@+id/imgDepressPlaylist"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_depress">
+        </com.tkpm.emusicmvc.views.BouncingImageView>
+        <com.tkpm.emusicmvc.views.BouncingImageView
+            android:id="@+id/imgEDMPlaylist"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_edm">
+        </com.tkpm.emusicmvc.views.BouncingImageView>
+        <com.tkpm.emusicmvc.views.BouncingImageView
+            android:id="@+id/imgWorkoutPlaylist"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_workout">
+        </com.tkpm.emusicmvc.views.BouncingImageView>
 
-    </RelativeLayout>
-
+    </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

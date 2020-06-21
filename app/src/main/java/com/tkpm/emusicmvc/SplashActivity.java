@@ -39,6 +39,7 @@ public class SplashActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 1240;
     private static final String TAG = "SplashActivity";
     private DatabaseManager mDatabaseManager;
+    private ArrayList<Song> tempAudioList;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
 
@@ -54,13 +55,14 @@ public class SplashActivity extends AppCompatActivity {
 
     public void initApp() {
         mDatabaseManager = DatabaseManager.newInstance(getApplicationContext());
+        mDatabaseManager.resetDB();
         final SongListDbAdapter songListDbAdapter = SongListDbAdapter.getSongListAdapterInstance(mDatabaseManager);
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 Log.d(TAG, "doInBackground: SIZE AUDIOS " + songListDbAdapter.getRowsSong());
-                ArrayList<Song> tempAudioList = songListDbAdapter.getAllAudioFromDevice();
+                tempAudioList = songListDbAdapter.getAllAudioFromDevice();
                 Log.d(TAG, "doInBackground: AUDIO " + tempAudioList.size());
                 if (songListDbAdapter.getRowsSong() != tempAudioList.size()) {
                     for (Song song : tempAudioList) {
@@ -69,16 +71,8 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 }
 
-                PlaylistDBAdapter.createPlaylist("Angry");
-                PlaylistDBAdapter.createPlaylist("Happy");
-                PlaylistDBAdapter.createPlaylist("Sleepy");
-                PlaylistDBAdapter.createPlaylist("Rock");
-                PlaylistDBAdapter.createPlaylist("Depress");
-                PlaylistDBAdapter.createPlaylist("Relax");
-                PlaylistDBAdapter.createPlaylist("Rap");
-                PlaylistDBAdapter.createPlaylist("EDM");
-                PlaylistDBAdapter.createPlaylist("Sad");
-                Log.d("created table playlist", PlaylistDBAdapter.getPlaylistById(1).getTitle());
+                createPlaylistDB();
+                createPlaylistSongDB();
             }
         }).start();
 
@@ -186,5 +180,28 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    public void createPlaylistDB(){
+        PlaylistDBAdapter.createPlaylist(getResources().getString(R.string.playlist_angry)); // id 1
+        PlaylistDBAdapter.createPlaylist(getResources().getString(R.string.playlist_happy));  // id 2
+        PlaylistDBAdapter.createPlaylist(getResources().getString(R.string.playlist_workout)); // id 3
+        PlaylistDBAdapter.createPlaylist(getResources().getString(R.string.playlist_rock)); // id 4
+        PlaylistDBAdapter.createPlaylist(getResources().getString(R.string.playlist_depress)); // id 5
+        PlaylistDBAdapter.createPlaylist(getResources().getString(R.string.playlist_relax)); // id 6
+        PlaylistDBAdapter.createPlaylist(getResources().getString(R.string.playlist_rap)); // id 7
+        PlaylistDBAdapter.createPlaylist(getResources().getString(R.string.playlist_edm)); // id 8
+        PlaylistDBAdapter.createPlaylist(getResources().getString(R.string.playlist_sad)); // id 9
+    }
+
+    public void createPlaylistSongDB(){
+        int playlist_id = 1;
+        for(Song song : tempAudioList){
+           PlaylistSongModel.addSongToPlaylist((int)song.getSongId(), playlist_id);
+           PlaylistSongModel.addSongToPlaylist((int)song.getSongId(), ++playlist_id);
+           PlaylistSongModel.addSongToPlaylist((int)song.getSongId(), ++playlist_id);
+           if(playlist_id >= 9)
+               playlist_id = 1;
+        }
     }
 }

@@ -85,7 +85,7 @@ public class PlaylistSongModel {
     public static ArrayList<Song> getAllSongFromPlaylistId(int playlistId) {
         SQLiteDatabase db = DatabaseManager.getInstance().getReadableDatabase();
         ArrayList<Song> resultSongs = new ArrayList<>();
-        String query = "SELECT S.* FROM playlist_song PS JOIN songs S ON PS.song_id=S.song_id WHERE PS.playlist_id=?";
+        String query = "SELECT S.* FROM playlist_song PS JOIN song S ON PS.song_id=S.song_id WHERE PS.playlist_id=?";
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(playlistId)});
 
         while (cursor.moveToNext()) {
@@ -96,10 +96,6 @@ public class PlaylistSongModel {
             songModel.setArtist(cursor.getString(cursor.getColumnIndex(Song.COLUMN_ARTIST)));
             songModel.setDuration(cursor.getLong(cursor.getColumnIndex(Song.COLUMN_DURATION)));
             songModel.setPath(cursor.getString(cursor.getColumnIndex(Song.COLUMN_PATH)));
-
-            byte[] bytes = cursor.getBlob(cursor.getColumnIndex(Song.COLUMN_BITMAP));
-            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-            songModel.setBitmap(bitmap);
 
             resultSongs.add(songModel);
         }

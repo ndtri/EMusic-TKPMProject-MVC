@@ -33,12 +33,21 @@ public class PlayActivityViewImpl implements IPlayActivityView, View.OnClickList
     SeekBar seekBarDurationSong;
 
     Song song;
-    long songId;
+    long msongId;
 
     public PlayActivityViewImpl(Context context, ViewGroup container, Intent intent) throws Exception {
         rootView = LayoutInflater.from(context).inflate(R.layout.player, container);
         playActivityModel = new SongListRepository(MyApplication.getSongListDbAdapter());
-        songId = intent.getLongExtra("songId",1);
+        msongId = intent.getLongExtra("songId",1);
+        playActivityModel = new SongListRepository(MyApplication.getSongListDbAdapter());
+        playActivityController = new PlayActivityController(playActivityModel,this);
+        song = playActivityModel.getSong(msongId);
+        playActivityController.play(song);
+    }
+
+    public PlayActivityViewImpl(Context context, ViewGroup container, Intent intent, long songId) throws Exception {
+        rootView = LayoutInflater.from(context).inflate(R.layout.player, container);
+        playActivityModel = new SongListRepository(MyApplication.getSongListDbAdapter());
         playActivityModel = new SongListRepository(MyApplication.getSongListDbAdapter());
         playActivityController = new PlayActivityController(playActivityModel,this);
         song = playActivityModel.getSong(songId);
