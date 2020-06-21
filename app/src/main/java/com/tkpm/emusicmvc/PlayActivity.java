@@ -18,13 +18,23 @@ public class PlayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        appView = ViewFactory.getMVCView(ViewFactory.VIEW_TYPE.PLAY_VIEW_TYPE, PlayActivity.this, null, getIntent());
+        try {
+            appView = ViewFactory.getMVCView(ViewFactory.VIEW_TYPE.PLAY_VIEW_TYPE, PlayActivity.this, null, getIntent());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         setContentView(appView.getRootView());
-        appView.initViews();
+
+        try {
+            appView.initViews();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         int playlist_id = getIntent().getExtras().getInt("PLAYLIST_ID");
         TextView tv_media_title_detail = findViewById(R.id.tv_media_artist_detail);
         tv_media_title_detail.setText(playlist_id+"");
+
     }
 
 

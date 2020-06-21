@@ -2,6 +2,7 @@ package com.tkpm.emusicmvc.views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.example.emusic.R;
 import com.tkpm.emusicmvc.MyApplication;
 import com.tkpm.emusicmvc.PlayActivity;
 import com.tkpm.emusicmvc.controllers.FetchActivityController;
+import com.tkpm.emusicmvc.controllers.PlayActivityController;
 import com.tkpm.emusicmvc.models.Song;
 import com.tkpm.emusicmvc.models.repositories.Observer;
 import com.tkpm.emusicmvc.models.repositories.SongListRepository;
@@ -27,6 +29,7 @@ public class FetchActivityViewImpl implements IFetchActivityView, SongAdapter.Li
     private SongListRepository fetchActivityModel;
 
     private RecyclerView recyclerView;
+
 
     SongAdapter songAdapter;
 

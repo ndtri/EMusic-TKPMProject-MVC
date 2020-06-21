@@ -14,6 +14,7 @@ public class Song {
 
     private long id;
     private long songId;
+    private long playlistId;
     private String path;
     private String artist;
     private String title;
@@ -38,6 +39,14 @@ public class Song {
 
     public void setSongId(int song_id) {
         this.songId = song_id;
+    }
+
+    public long getPlaylistId() {
+        return playlistId;
+    }
+
+    public void setPlaylistId(long playlistId) {
+        this.playlistId = playlistId;
     }
 
     public String getPath() {
