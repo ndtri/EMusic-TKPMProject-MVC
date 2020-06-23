@@ -17,11 +17,13 @@ import com.tkpm.emusicmvc.MyApplication;
 import com.tkpm.emusicmvc.PlayActivity;
 import com.tkpm.emusicmvc.controllers.FetchActivityController;
 import com.tkpm.emusicmvc.controllers.PlayActivityController;
+import com.tkpm.emusicmvc.models.PlaylistSongModel;
 import com.tkpm.emusicmvc.models.Song;
 import com.tkpm.emusicmvc.models.repositories.Observer;
 import com.tkpm.emusicmvc.models.repositories.SongListRepository;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class FetchActivityViewImpl implements IFetchActivityView, SongAdapter.ListItemClickListener {
     View rootView;
@@ -29,15 +31,16 @@ public class FetchActivityViewImpl implements IFetchActivityView, SongAdapter.Li
     private SongListRepository fetchActivityModel;
 
     private RecyclerView recyclerView;
+    private int playlist_id;
 
 
     SongAdapter songAdapter;
 
-    public FetchActivityViewImpl(Context context, ViewGroup container) {
+    public FetchActivityViewImpl(Context context, ViewGroup container, Intent intent) {
         rootView = LayoutInflater.from(context).inflate(R.layout.activity_fetch,container);
         fetchActivityModel = new SongListRepository(MyApplication.getSongListDbAdapter());
-
-        fetchActivityController = new FetchActivityController(fetchActivityModel, this);
+        playlist_id = Objects.requireNonNull(intent.getExtras()).getInt("PLAYLIST_ID");
+        fetchActivityController = new FetchActivityController(fetchActivityModel, this, playlist_id);
     }
 
     @Override
@@ -60,6 +63,14 @@ public class FetchActivityViewImpl implements IFetchActivityView, SongAdapter.Li
     @Override
     public void showAllSongs(ArrayList<Song> songList) {
         songAdapter = new SongAdapter(rootView.getContext(), songList, this);
+        songAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(songAdapter);
+    }
+
+    @Override
+    public void showPlaylistSongs(int playlist_id) {
+        ArrayList<Song> audioList = PlaylistSongModel.getAllSongFromPlaylistId(playlist_id);
+        songAdapter = new SongAdapter(rootView.getContext(), audioList, this);
         songAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(songAdapter);
     }

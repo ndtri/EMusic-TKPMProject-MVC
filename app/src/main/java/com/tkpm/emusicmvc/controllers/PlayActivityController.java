@@ -4,6 +4,7 @@ import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.util.Log;
 
+import com.example.emusic.BuildConfig;
 import com.tkpm.emusicmvc.models.Song;
 import com.tkpm.emusicmvc.models.repositories.SongListRepository;
 import com.tkpm.emusicmvc.views.PlayActivityViewImpl;
@@ -11,14 +12,15 @@ import com.tkpm.emusicmvc.views.PlayActivityViewImpl;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class PlayActivityController implements IController, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
+public class PlayActivityController implements IController, MediaPlayer.OnPreparedListener {
     SongListRepository songListModel;
     PlayActivityViewImpl songView;
 
-    //private ArrayList<Song> audioList;
+    private static ArrayList<Song> waitingSongs = new ArrayList<>();
     private static Song curSong;
 
     private static boolean isPause;
+    private static boolean isStopped = false;
     private static MediaPlayer mediaPlayer = null;
     private CountDownTimer countDownTimerUpdateSeekBar = null;
 
@@ -32,18 +34,21 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
     public PlayActivityController(SongListRepository songListModel, PlayActivityViewImpl songView){
         this.songListModel = songListModel;
         this.songView = songView;
-        mediaPlayer = new MediaPlayer();
+        if (mediaPlayer == null) {
+            mediaPlayer = new MediaPlayer();
+        }
     }
 
     @Override
     public void onViewLoaded() {
+        //songView.updateControlPlaying(waitingSongs.get(0));
         songView.updateControlPlaying(curSong);
     }
 
-    @Override
-    public void onCompletion(MediaPlayer mp) {
-
-    }
+//    @Override
+//    public void onCompletion(MediaPlayer mp) {
+//
+//    }
 
     @Override
     public void onPrepared(MediaPlayer mp) {
@@ -67,9 +72,10 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
 
         }
         mp.start();
-//
+
         if (songView != null) {
             songView.updateButtonPlay();
+            //songView.updateControlPlaying(waitingSongs.get(0));
         }
     }
 
@@ -84,23 +90,80 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
 //    }
 
     public static boolean isPlaying() {
+//        if (isStopped) {
+//            return false;
+//        }
         return mediaPlayer.isPlaying();
     }
 
     public static boolean isPause() {
+//        if (isStopped) {
+//            return true;
+//        }
         return isPause;
+    }
+
+    private void stopPlaying() {
+        if (mediaPlayer != null) {
+            isStopped = true;
+            mediaPlayer.reset();
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 
     public void play(final Song song) {
         isPause = false;
+        isStopped = false;
+
         try {
             curSong = song;
             mediaPlayer.reset();
             mediaPlayer.setDataSource(curSong.getPath());
             mediaPlayer.setOnPreparedListener(this);
-            mediaPlayer.setOnCompletionListener(this);
+            //mediaPlayer.prepare();
+            mediaPlayer.setOnCompletionListener(mp -> {
+                //countDownTimerUpdateSeekBar.cancel();
+                songView.updateButtonPlay();
+//                stopPlaying();
+                mediaPlayer.stop();
+                //isStopped = true;
+                //mediaPlayer.pause();
+                //mediaPlayer = new MediaPlayer();
 
+                //songView.updateControlPlaying(curSong);
+            });
             mediaPlayer.prepareAsync();
+
+//            if (curSong != waitingSongs.get(0)) {
+//                //stopPlaying();
+//                curSong = waitingSongs.get(0);
+//                mediaPlayer = new MediaPlayer();
+//                //mediaPlayer.reset();
+//                mediaPlayer.setDataSource(curSong.getPath());
+//                mediaPlayer.setOnPreparedListener(this);
+//                mediaPlayer.start();
+//
+//            }
+//
+//            mediaPlayer.setOnCompletionListener(mp -> {
+//                stopPlaying();
+//                waitingSongs.remove(0);
+//                curSong = waitingSongs.get(0);
+//                //songView.updateControlPlaying(curSong);
+//                mediaPlayer = new MediaPlayer();
+//                try {
+//                    mediaPlayer.setDataSource(curSong.getPath());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                mediaPlayer.setOnPreparedListener(this);
+//                mediaPlayer.start();
+//                //songView.updateControlPlaying(curSong);
+//            });
+            //mediaPlayer.setOnCompletionListener(this);
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -115,5 +178,6 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
         isPause = false;
         mediaPlayer.seekTo(mediaPlayer.getCurrentPosition());
         mediaPlayer.start();
+
     }
 }

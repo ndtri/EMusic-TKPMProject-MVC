@@ -6,16 +6,18 @@ import com.tkpm.emusicmvc.views.FetchActivityViewImpl;
 public class FetchActivityController implements IController {
     SongListRepository songListModel;
     FetchActivityViewImpl songListView;
+    int playlist_id;
 
-    public FetchActivityController(SongListRepository songListModel, FetchActivityViewImpl songListView){
+    public FetchActivityController(SongListRepository songListModel, FetchActivityViewImpl songListView, int playlist_id){
         this.songListModel = songListModel;
         this.songListView = songListView;
+        this.playlist_id = playlist_id;
     }
 
     @Override
     public void onViewLoaded() {
         try {
-            songListView.showAllSongs(songListModel.getSongList());
+            songListView.showPlaylistSongs(playlist_id);
         } catch (Exception e){
             e.printStackTrace();
         }

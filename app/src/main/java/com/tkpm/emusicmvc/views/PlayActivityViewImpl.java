@@ -49,6 +49,7 @@ public class PlayActivityViewImpl implements IPlayActivityView, View.OnClickList
         rootView = LayoutInflater.from(context).inflate(R.layout.player, container);
         playActivityModel = new SongListRepository(MyApplication.getSongListDbAdapter());
         playActivityModel = new SongListRepository(MyApplication.getSongListDbAdapter());
+        //msongId = intent.getLongExtra("songId", 1);
         playActivityController = new PlayActivityController(playActivityModel,this);
         song = playActivityModel.getSong(songId);
         playActivityController.play(song);
@@ -76,7 +77,7 @@ public class PlayActivityViewImpl implements IPlayActivityView, View.OnClickList
         seekBarDurationSong.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                playActivityController.updateDuration(progress);
+                //playActivityController.updateDuration(progress);
                 if (fromUser) {
                     playActivityController.updateDuration(progress);
                     if (!PlayActivityController.isPlaying()) {

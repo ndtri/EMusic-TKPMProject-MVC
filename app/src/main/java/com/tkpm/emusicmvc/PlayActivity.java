@@ -30,9 +30,9 @@ public class PlayActivity extends AppCompatActivity {
         playlist_id = getIntent().getExtras().getInt("PLAYLIST_ID");
         audioList = PlaylistSongModel.getAllSongFromPlaylistId(playlist_id);
 
-        for(Song song: audioList) {
+        //for(Song song: audioList) {
             try {
-                appView = ViewFactory.getMVCView(ViewFactory.VIEW_TYPE.PLAY_VIEW_TYPE, PlayActivity.this, null, getIntent(), song.getSongId());
+                appView = ViewFactory.getMVCView(ViewFactory.VIEW_TYPE.PLAY_VIEW_TYPE, PlayActivity.this, null, getIntent());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -43,7 +43,7 @@ public class PlayActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        //}
 
 
     }

@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, PlayActivity.class);
+        Intent intent = new Intent(this, FetchActivity.class);
         switch (v.getId()){
             case R.id.imgAngryPlaylist:
                 intent.putExtra("PLAYLIST_ID", 1);
