@@ -34,26 +34,28 @@ public class PlayActivityViewImpl implements IPlayActivityView, View.OnClickList
 
     Song song;
     long msongId;
+    int mplaylistId;
 
     public PlayActivityViewImpl(Context context, ViewGroup container, Intent intent) throws Exception {
         rootView = LayoutInflater.from(context).inflate(R.layout.player, container);
         playActivityModel = new SongListRepository(MyApplication.getSongListDbAdapter());
         msongId = intent.getLongExtra("songId",1);
+        mplaylistId = intent.getIntExtra("playlist_id", 1);
         playActivityModel = new SongListRepository(MyApplication.getSongListDbAdapter());
-        playActivityController = new PlayActivityController(playActivityModel,this);
+        playActivityController = new PlayActivityController(playActivityModel,this, mplaylistId);
         song = playActivityModel.getSong(msongId);
         playActivityController.play(song);
     }
 
-    public PlayActivityViewImpl(Context context, ViewGroup container, Intent intent, long songId) throws Exception {
-        rootView = LayoutInflater.from(context).inflate(R.layout.player, container);
-        playActivityModel = new SongListRepository(MyApplication.getSongListDbAdapter());
-        playActivityModel = new SongListRepository(MyApplication.getSongListDbAdapter());
-        //msongId = intent.getLongExtra("songId", 1);
-        playActivityController = new PlayActivityController(playActivityModel,this);
-        song = playActivityModel.getSong(songId);
-        playActivityController.play(song);
-    }
+//    public PlayActivityViewImpl(Context context, ViewGroup container, Intent intent, long songId) throws Exception {
+//        rootView = LayoutInflater.from(context).inflate(R.layout.player, container);
+//        playActivityModel = new SongListRepository(MyApplication.getSongListDbAdapter());
+//        playActivityModel = new SongListRepository(MyApplication.getSongListDbAdapter());
+//        //msongId = intent.getLongExtra("songId", 1);
+//        playActivityController = new PlayActivityController(playActivityModel,this);
+//        song = playActivityModel.getSong(songId);
+//        playActivityController.play(song);
+//    }
 
     @Override
     public void initViews() {
@@ -108,7 +110,7 @@ public class PlayActivityViewImpl implements IPlayActivityView, View.OnClickList
     @Override
     public void updateControlPlaying(Song curSong) {
         try {
-            curSong = song;
+            //curSong = song;
             textViewTitle.setText(curSong.getTitle());
             textViewArtist.setText(curSong.getArtist());
             txtTotalTime.setText(SongListDbAdapter.formatMilliSecond(curSong.getDuration()));
@@ -162,12 +164,13 @@ public class PlayActivityViewImpl implements IPlayActivityView, View.OnClickList
                     playActivityController.play(song);
                     setButtonPause();
                 }
-
                 break;
             case R.id.btnNext:
-                break;
+                    playActivityController.next();
+                    break;
             case R.id.btnPrevious:
-                break;
+                    playActivityController.previous();
+                    break;
             default:
                 break;
         }

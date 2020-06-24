@@ -15,13 +15,10 @@ import java.util.Objects;
 
 public class FetchActivity extends AppCompatActivity {
     IView appView;
-    int playlist_id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //playlist_id = Objects.requireNonNull(getIntent().getExtras()).getInt("PLAYLIST_ID");
 
         try {
             appView = ViewFactory.getMVCView(ViewFactory.VIEW_TYPE.FETCH_VIEW_TYPE, FetchActivity.this, null, getIntent());

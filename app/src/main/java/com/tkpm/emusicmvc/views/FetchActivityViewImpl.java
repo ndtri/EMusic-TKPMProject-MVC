@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -48,6 +49,7 @@ public class FetchActivityViewImpl implements IFetchActivityView, SongAdapter.Li
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(rootView.getContext());
         recyclerView = rootView.findViewById(R.id.rv_list);
         recyclerView.setLayoutManager(linearLayoutManager);
+
     }
 
     @Override
@@ -84,6 +86,7 @@ public class FetchActivityViewImpl implements IFetchActivityView, SongAdapter.Li
     public void navigateToPlayActivity(long songId){
         Intent intent = new Intent(rootView.getContext(), PlayActivity.class);
         intent.putExtra("songId", songId);
+        intent.putExtra("playlist_id", playlist_id);
         rootView.getContext().startActivity(intent);
     }
 }

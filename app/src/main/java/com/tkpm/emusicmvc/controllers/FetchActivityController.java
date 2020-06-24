@@ -26,4 +26,8 @@ public class FetchActivityController implements IController {
     public void onSongSelected(long songId){
         songListView.navigateToPlayActivity(songId);
     }
+
+    public void onPlayAllClicked(int playlist_id) {
+        //songListView.navigateToPlayActivity(playlist_id);
+    }
 }

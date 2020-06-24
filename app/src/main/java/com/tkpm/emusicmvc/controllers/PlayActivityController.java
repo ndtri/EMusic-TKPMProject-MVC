@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.util.Log;
 
 import com.example.emusic.BuildConfig;
+import com.tkpm.emusicmvc.models.PlaylistSongModel;
 import com.tkpm.emusicmvc.models.Song;
 import com.tkpm.emusicmvc.models.repositories.SongListRepository;
 import com.tkpm.emusicmvc.views.PlayActivityViewImpl;
@@ -12,12 +13,14 @@ import com.tkpm.emusicmvc.views.PlayActivityViewImpl;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class PlayActivityController implements IController, MediaPlayer.OnPreparedListener {
+public class PlayActivityController implements IController, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
     SongListRepository songListModel;
     PlayActivityViewImpl songView;
 
-    private static ArrayList<Song> waitingSongs = new ArrayList<>();
+    private static ArrayList<Song> audioList;
     private static Song curSong;
+    private int position;
+    private int playlist_id;
 
     private static boolean isPause;
     private static boolean isStopped = false;
@@ -31,9 +34,11 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
 
     public static final int ACTION_FROM_USER = 1;
 
-    public PlayActivityController(SongListRepository songListModel, PlayActivityViewImpl songView){
+    public PlayActivityController(SongListRepository songListModel, PlayActivityViewImpl songView, int playlist_id){
         this.songListModel = songListModel;
         this.songView = songView;
+        this.playlist_id = playlist_id;
+        audioList = PlaylistSongModel.getAllSongFromPlaylistId(playlist_id);
         if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
         }
@@ -44,11 +49,6 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
         //songView.updateControlPlaying(waitingSongs.get(0));
         songView.updateControlPlaying(curSong);
     }
-
-//    @Override
-//    public void onCompletion(MediaPlayer mp) {
-//
-//    }
 
     @Override
     public void onPrepared(MediaPlayer mp) {
@@ -79,6 +79,16 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
         }
     }
 
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+        //                songView.updateButtonPlay();
+//                mediaPlayer.stop();
+        stopPlaying();
+        countDownTimerUpdateSeekBar.cancel();
+        mediaPlayer = new MediaPlayer();
+        next();
+    }
+
     public void updateDuration(int progress) {
         mediaPlayer.seekTo(progress * 1000);
     }
@@ -90,22 +100,15 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
 //    }
 
     public static boolean isPlaying() {
-//        if (isStopped) {
-//            return false;
-//        }
         return mediaPlayer.isPlaying();
     }
 
     public static boolean isPause() {
-//        if (isStopped) {
-//            return true;
-//        }
         return isPause;
     }
 
     private void stopPlaying() {
         if (mediaPlayer != null) {
-            isStopped = true;
             mediaPlayer.reset();
             mediaPlayer.stop();
             mediaPlayer.release();
@@ -113,56 +116,27 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
         }
     }
 
+    public int findCurSongIndex(Song curSong) {
+        for (int i = 0; i < audioList.size(); i++) {
+            if (audioList.get(i).getSongId() == curSong.getSongId()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public void play(final Song song) {
         isPause = false;
-        isStopped = false;
+        //isStopped = false;
 
         try {
             curSong = song;
+            position = findCurSongIndex(curSong);
             mediaPlayer.reset();
             mediaPlayer.setDataSource(curSong.getPath());
             mediaPlayer.setOnPreparedListener(this);
-            //mediaPlayer.prepare();
-            mediaPlayer.setOnCompletionListener(mp -> {
-                //countDownTimerUpdateSeekBar.cancel();
-                songView.updateButtonPlay();
-//                stopPlaying();
-                mediaPlayer.stop();
-                //isStopped = true;
-                //mediaPlayer.pause();
-                //mediaPlayer = new MediaPlayer();
-
-                //songView.updateControlPlaying(curSong);
-            });
+            mediaPlayer.setOnCompletionListener(this);
             mediaPlayer.prepareAsync();
-
-//            if (curSong != waitingSongs.get(0)) {
-//                //stopPlaying();
-//                curSong = waitingSongs.get(0);
-//                mediaPlayer = new MediaPlayer();
-//                //mediaPlayer.reset();
-//                mediaPlayer.setDataSource(curSong.getPath());
-//                mediaPlayer.setOnPreparedListener(this);
-//                mediaPlayer.start();
-//
-//            }
-//
-//            mediaPlayer.setOnCompletionListener(mp -> {
-//                stopPlaying();
-//                waitingSongs.remove(0);
-//                curSong = waitingSongs.get(0);
-//                //songView.updateControlPlaying(curSong);
-//                mediaPlayer = new MediaPlayer();
-//                try {
-//                    mediaPlayer.setDataSource(curSong.getPath());
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                mediaPlayer.setOnPreparedListener(this);
-//                mediaPlayer.start();
-//                //songView.updateControlPlaying(curSong);
-//            });
-            //mediaPlayer.setOnCompletionListener(this);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -179,5 +153,48 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
         mediaPlayer.seekTo(mediaPlayer.getCurrentPosition());
         mediaPlayer.start();
 
+    }
+
+
+    public void next() {
+        if (mediaPlayer!= null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+        }
+        try {
+            if(position == audioList.size() - 1){
+                position = -1;
+            }
+            curSong = audioList.get(++position);
+            songView.updateControlPlaying(curSong);
+            mediaPlayer.reset();
+            mediaPlayer.setDataSource(curSong.getPath());
+            mediaPlayer.setOnPreparedListener(this);
+            mediaPlayer.setOnCompletionListener(this);
+            //mediaPlayer.start();
+            mediaPlayer.prepareAsync();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void previous() {
+        if (mediaPlayer!= null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+        }
+        try {
+            if(position == 0){
+                position = audioList.size();
+            }
+            curSong = audioList.get(--position);
+            songView.updateControlPlaying(curSong);
+            mediaPlayer.reset();
+            mediaPlayer.setDataSource(curSong.getPath());
+            mediaPlayer.setOnPreparedListener(this);
+            mediaPlayer.setOnCompletionListener(this);
+            mediaPlayer.prepareAsync();
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 }
