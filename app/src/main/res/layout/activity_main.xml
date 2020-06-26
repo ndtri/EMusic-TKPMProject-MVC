@@ -25,36 +25,40 @@
             android:layout_width="250dp"
             android:layout_height="45dp"
             android:layout_margin="5dp"
-            android:ems="10"
-            android:hint="How do you FEEL"
-            android:drawableLeft="@drawable/ic_search"
             android:background="@color/colorStroke"
-            android:gravity="center" >
-        </EditText>
+            android:drawableLeft="@drawable/ic_search"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="How do you FEEL?"
+            android:paddingLeft="10dp"></EditText>
 
         <RadioGroup
+            android:id="@+id/btnFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/btnFilter">
-        <RadioButton
-            android:id="@+id/btnRedFilter"
-            android:layout_margin="6dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorRed"/>
-        <RadioButton
-            android:id="@+id/btnGreenFilter"
-            android:layout_margin="6dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorGreen"/>
-        <RadioButton
-            android:id="@+id/btnOrangeFilter"
-            android:layout_margin="6dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorOrange"/>
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/btnRedFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:buttonTint="@color/colorRed" />
+
+            <RadioButton
+                android:id="@+id/btnGreenFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:buttonTint="@color/colorGreen" />
+
+            <RadioButton
+                android:id="@+id/btnOrangeFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:buttonTint="@color/colorOrange" />
         </RadioGroup>
 
     </LinearLayout>
