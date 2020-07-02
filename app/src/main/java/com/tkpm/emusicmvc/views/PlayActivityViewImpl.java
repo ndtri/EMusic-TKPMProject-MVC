@@ -6,7 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,12 +34,16 @@ public class PlayActivityViewImpl implements IPlayActivityView, View.OnClickList
     ImageButton shuffleBtn;
     ImageButton repeatBtn;
     SeekBar seekBarDurationSong;
+    ImageView img_music_disk;
+    Animation rotateAnimetion;
 
     Song song;
     long msongId;
     int mplaylistId;
+    Context mContext;
 
     public PlayActivityViewImpl(Context context, ViewGroup container, Intent intent) throws Exception {
+        mContext = context;
         rootView = LayoutInflater.from(context).inflate(R.layout.player, container);
         playActivityModel = new SongListRepository(MyApplication.getSongListDbAdapter());
         msongId = intent.getLongExtra("songId",1);
@@ -69,6 +76,10 @@ public class PlayActivityViewImpl implements IPlayActivityView, View.OnClickList
         repeatBtn = rootView.findViewById(R.id.btnRepeat);
         shuffleBtn = rootView.findViewById(R.id.btnShuffle);
         seekBarDurationSong = rootView.findViewById(R.id.seekbarPlayer);
+        img_music_disk = (ImageView) rootView.findViewById(R.id.img_music_disk);
+
+        rotateAnimetion = AnimationUtils.loadAnimation(mContext, R.anim.rotate);
+        img_music_disk.startAnimation(rotateAnimetion);
 
         playBtn.setOnClickListener(this);
         nextBtn.setOnClickListener(this);
@@ -157,12 +168,15 @@ public class PlayActivityViewImpl implements IPlayActivityView, View.OnClickList
                 if (PlayActivityController.isPlaying()) {// song is playing then stop
                     playActivityController.pause();
                     setButtonPlay();
+                    img_music_disk.clearAnimation();
                 } else if (PlayActivityController.isPause()) { //resume
                     playActivityController.resume();
                     setButtonPause();
+                    img_music_disk.startAnimation(rotateAnimetion);
                 } else {
                     playActivityController.play(song);
                     setButtonPause();
+                    img_music_disk.startAnimation(rotateAnimetion);
                 }
                 break;
             case R.id.btnNext:

@@ -45,7 +45,7 @@
             android:id="@+id/btnPlay"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/play_button_background"
             android:contentDescription="@string/app_name"
             android:padding="12dp"
@@ -53,6 +53,7 @@
             android:tint="@color/colorWhite"
             app:layout_constraintBottom_toTopOf="@+id/imgLyrics"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
@@ -109,13 +110,12 @@
             android:id="@+id/seekbarPlayer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="8dp"
             android:progress="0"
             android:theme="@style/SeekBarTheme"
 
-            app:layout_constraintBottom_toTopOf="@id/btnPlay" />
+            app:layout_constraintBottom_toTopOf="@id/btnPlay"
+            tools:layout_editor_absoluteX="32dp" />
 
         <TextView
             android:id="@+id/txtCurrentTime"
@@ -154,26 +154,38 @@
         android:id="@+id/tv_media_artist_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        android:textColor="@color/colorPrimaryText"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="12dp"
+        android:text="Artist"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_media_title_detail"
-        app:layout_constraintVertical_bias="0.014" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_media_title_detail" />
 
     <TextView
         android:id="@+id/tv_media_title_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="268dp"
-        android:text="TextView"
+        android:layout_marginBottom="24dp"
+        android:text="Title"
         android:textColor="@color/colorPrimaryText"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/img_music_disk"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_music_disk"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:src="@mipmap/ic_music_disk_foreground"
+        app:layout_constraintBottom_toTopOf="@+id/layoutPlayer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

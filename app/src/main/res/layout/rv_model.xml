@@ -33,13 +33,13 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_play"
+            tools:ignore="VectorDrawableCompat"
             tools:layout_conversion_absoluteHeight="48dp"
-            tools:layout_conversion_absoluteWidth="48dp"
-            tools:ignore="VectorDrawableCompat" />
+            tools:layout_conversion_absoluteWidth="48dp" />
 
         <TextView
             android:id="@+id/tv_media_artist"

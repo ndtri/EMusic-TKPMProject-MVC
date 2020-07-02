@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/967945087/EMusic-TKPMProject-MVC-emusicmvc.iml" filepath="$PROJECT_DIR$/.idea/modules/967945087/EMusic-TKPMProject-MVC-emusicmvc.iml" group="emusicmvc" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app.iml" group="emusicmvc/app" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1034951840/emusicmvc.iml" filepath="$PROJECT_DIR$/.idea/modules/1034951840/emusicmvc.iml" group="emusicmvc" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/emusicmvc-app.iml" filepath="$PROJECT_DIR$/.idea/modules/emusicmvc-app.iml" group="emusicmvc/app" />
     </modules>
   </component>
 </project>
