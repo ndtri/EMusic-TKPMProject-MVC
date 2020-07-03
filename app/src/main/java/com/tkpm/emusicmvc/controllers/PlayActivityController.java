@@ -26,11 +26,11 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
     private static boolean isStopped = false;
     private static MediaPlayer mediaPlayer = null;
     private CountDownTimer countDownTimerUpdateSeekBar = null;
+    private static int loopType;
 
 
-    public static final int LOOP_NONE = 1;
-    public static final int LOOP_ALL = 2;
-    public static final int LOOP_ONE = 3;
+    public static final int LOOP_ALL = 1;
+    public static final int LOOP_ONE = 2;
 
     public static final int ACTION_FROM_USER = 1;
 
@@ -38,6 +38,7 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
         this.songListModel = songListModel;
         this.songView = songView;
         this.playlist_id = playlist_id;
+        loopType = LOOP_ALL;
         audioList = PlaylistSongModel.getAllSongFromPlaylistId(playlist_id);
         if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
@@ -86,7 +87,12 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
         stopPlaying();
         countDownTimerUpdateSeekBar.cancel();
         mediaPlayer = new MediaPlayer();
-        next();
+        if (loopType == LOOP_ALL) {
+            next();
+        } else {
+            play(curSong);
+        }
+
     }
 
     public void updateDuration(int progress) {
@@ -155,6 +161,17 @@ public class PlayActivityController implements IController, MediaPlayer.OnPrepar
 
     }
 
+    public static boolean isRepeatAll() {
+        return loopType == LOOP_ALL;
+    }
+
+    public void repeat() {
+        if (loopType == LOOP_ALL) {
+            loopType = LOOP_ONE;
+        } else {
+            loopType = LOOP_ALL;
+        }
+    }
 
     public void next() {
         if (mediaPlayer!= null && mediaPlayer.isPlaying()) {

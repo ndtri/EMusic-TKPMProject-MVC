@@ -159,6 +159,14 @@ public class PlayActivityViewImpl implements IPlayActivityView, View.OnClickList
         playBtn.setImageResource(R.drawable.ic_pause);
     }
 
+    private void setButtonRepeatAll() {
+        repeatBtn.setImageResource(R.drawable.ic_repeat);
+    }
+
+    private void setButtonRepeatOne() {
+        repeatBtn.setImageResource(R.drawable.ic_repeat_one);
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -184,6 +192,14 @@ public class PlayActivityViewImpl implements IPlayActivityView, View.OnClickList
                     break;
             case R.id.btnPrevious:
                     playActivityController.previous();
+                    break;
+            case R.id.btnRepeat:
+                    if (PlayActivityController.isRepeatAll()) {
+                        setButtonRepeatOne();
+                    } else {
+                        setButtonRepeatAll();
+                    }
+                    playActivityController.repeat();
                     break;
             default:
                 break;

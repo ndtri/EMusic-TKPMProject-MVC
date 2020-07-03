@@ -17,10 +17,8 @@ import com.example.emusic.R;
 import com.tkpm.emusicmvc.MyApplication;
 import com.tkpm.emusicmvc.PlayActivity;
 import com.tkpm.emusicmvc.controllers.FetchActivityController;
-import com.tkpm.emusicmvc.controllers.PlayActivityController;
 import com.tkpm.emusicmvc.models.PlaylistSongModel;
 import com.tkpm.emusicmvc.models.Song;
-import com.tkpm.emusicmvc.models.repositories.Observer;
 import com.tkpm.emusicmvc.models.repositories.SongListRepository;
 
 import java.util.ArrayList;

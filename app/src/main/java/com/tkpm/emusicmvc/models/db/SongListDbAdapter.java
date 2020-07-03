@@ -114,11 +114,6 @@ public class SongListDbAdapter {
 
         finalTimerString = finalTimerString + minutes + ":" + secondsString;
 
-        //      return  String.format("%02d Min, %02d Sec",
-        //                TimeUnit.MILLISECONDS.toMinutes(milliseconds),
-        //                TimeUnit.MILLISECONDS.toSeconds(milliseconds) -
-        //                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milliseconds)));
-
         // return timer string
         return finalTimerString;
     }
